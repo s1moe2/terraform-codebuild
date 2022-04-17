@@ -1,0 +1,13 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
+  build:
+    commands:
+      - docker build -t $ECR_REGISTRY/my-project:$CODEBUILD_SOURCE_VERSION .
+  post_build:
+    commands:
+      - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REGISTRY
+      - docker push $ECR_REGISTRY/my-project:$CODEBUILD_SOURCE_VERSION

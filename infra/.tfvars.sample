@@ -1,0 +1,6 @@
+github_pat = "token"
+aws_access_key_id = "keyid"
+aws_secret_key = "secret"
+aws_region = "eu-west-1"
+dockerhub_password = "pwd"
+dockerhub_user = "usr"
